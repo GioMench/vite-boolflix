@@ -26,7 +26,10 @@ export default {
         <button @click="searchMovies()">CERCA</button>
 
         <ul>
-            <li v-for="result in state.results">
+            <li class="card" v-for="result in state.results">
+                <div>
+                    <img :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path " alt="">
+                </div>
                 <div>{{ result.title }}</div>
                 <div>{{ result.original_title }}</div>
                 <div>{{ result.original_language }}</div>
@@ -39,13 +42,19 @@ export default {
 
 <style>
 
-li{
+.card{
     border: 1px solid black;
     margin: 3px;
     list-style: none;
     border-radius: 8px;
     color: white;
     background-color: rgb(27, 27, 27);
+    width: 250px;  
+    padding: 8px;  
+    height: 420px;
+}
+img{
+    margin-bottom: 10px;
 }
 
 </style>
