@@ -6,6 +6,7 @@ export const state = reactive({
     base_movies_api_url: 'https://api.themoviedb.org/3/search/movie',
     key_api: 'fbdbb4bc9501aa5963bc9186e57dcf80',
     searchFilm: '',
+    base_series_api_url: 'https://api.themoviedb.org/3/search/tv',
     
 
     callApi(url) {

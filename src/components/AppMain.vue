@@ -11,8 +11,12 @@ export default {
         searchMovies() {
             const url = `${state.base_movies_api_url}?api_key=${state.key_api}&query=${state.searchFilm}`;
             //console.log(url);
-            this.state.callApi(url)
-        }
+            //const urlSerie = `${state.base_series_api_url}?api_key=${state.key_api}&query=${state.searchFilm}`;
+            this.state.callApi(url);
+         
+        },
+
+        
     }
 
 }
@@ -33,7 +37,7 @@ export default {
                 <div>{{ result.title }}</div>
                 <div>{{ result.original_title }}</div>
                 <div>{{ result.original_language }}</div>
-                <div>{{ result.vote_average }}</div>
+                <div>{{ Math.trunc(result.vote_average) }}</div>
             </li>
         </ul>
     </div>
