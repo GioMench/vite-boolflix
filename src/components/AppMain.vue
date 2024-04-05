@@ -32,12 +32,13 @@ export default {
         <ul>
             <li class="card" v-for="result in state.results">
                 <div>
-                    <img :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path " alt="">
+                    <img class="cover" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path " alt="">
                 </div>
                 <div>{{ result.title }}</div>
                 <div>{{ result.original_title }}</div>
+                <div> <img class="flag" :src="'/public/1x1/' + result.original_language + '.svg'" alt=""></div>
                 <div>{{ result.original_language }}</div>
-                <div>{{ Math.trunc(result.vote_average) }}</div>
+                <div> {{Math.trunc(result.vote_average)}}</div>
             </li>
         </ul>
     </div>
@@ -57,8 +58,12 @@ export default {
     padding: 8px;  
     height: 420px;
 }
-img{
+.cover{
     margin-bottom: 10px;
+}
+
+.flag{
+    width: 20px;
 }
 
 </style>
