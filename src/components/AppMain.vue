@@ -50,12 +50,19 @@ export default {
                 <div>{{ result.original_language }}</div>
 
 
-                <div v-if="Math.trunc(result.vote_average) > 5">
-                   5
+                <div v-if="Math.trunc(result.vote_average) >= 5">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
                 </div>
-                <div v-else>
-                   {{ Math.trunc(result.vote_average) }} 
-                </div>
+               
+                
+                <div v-else> 0</div>
+                
+               
+              
                 
             </li>
 

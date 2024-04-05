@@ -8,7 +8,7 @@ export const state = reactive({
     key_api: '020af5f4a170366144c3befd4f42b017',
     searchFilm: '',
     base_series_api_url: 'https://api.themoviedb.org/3/search/tv',
-    
+     
 
     callApi(url,urlSerie) {
         axios.get(url).then(resp => {
