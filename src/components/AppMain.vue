@@ -13,15 +13,15 @@ export default {
             //console.log(url);
             const urlSerie = `${state.base_series_api_url}?api_key=${state.key_api}&query=${state.searchFilm}`;
             this.state.callApi(url, urlSerie);
-            
-            /*this.state.callApiTv();*/
-            
-
         },
 
-        //searchTv(){}
-           
-        
+
+
+
+
+
+
+
 
 
     }
@@ -44,13 +44,19 @@ export default {
                 <div>{{ result.title }}</div>
                 <div>{{ result.original_title }}</div>
 
-                <div > 
+                <div>
                     <img class="flag" :src="'/public/1x1/' + result.original_language + '.svg'" alt="">
                 </div>
                 <div>{{ result.original_language }}</div>
-                
 
-                <div> {{ Math.trunc(result.vote_average) }}</div>
+
+                <div v-if="Math.trunc(result.vote_average) > 5">
+                   5
+                </div>
+                <div v-else>
+                   {{ Math.trunc(result.vote_average) }} 
+                </div>
+                
             </li>
 
             <li class="card" v-for="result in state.resultsTv">
@@ -60,13 +66,19 @@ export default {
                 <div>{{ result.title }}</div>
                 <div>{{ result.original_title }}</div>
 
-                <div > 
+                <div>
                     <img class="flag" :src="'/public/1x1/' + result.original_language + '.svg'" alt="">
                 </div>
                 <div>{{ result.original_language }}</div>
-                
 
-                <div> {{ Math.trunc(result.vote_average) }}</div>
+
+                <div v-if="Math.trunc(result.vote_average) > 5">
+                   5
+                </div>
+                <div v-else>
+                   {{ Math.trunc(result.vote_average) }} 
+                </div>
+                
             </li>
         </ul>
     </div>
