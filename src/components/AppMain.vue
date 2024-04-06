@@ -38,58 +38,65 @@ export default {
         <input type="text" v-model="state.searchFilm" @keyup.enter="searchMovies()">
         <button @click="searchMovies()">CERCA</button>
 
-        <ul>
+        <ul class="container">
+            <!--film-card-->
             <li class="card" v-for="result in state.results">
+                <!--img-film-->
                 <div>
                     <img class="cover" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
                 </div>
-                <div>{{ result.title }}</div>
-                <div>{{ result.original_title }}</div>
+                <div class="container_info">
+                    <!--title-film-->
+                    <h2>{{ result.title }}</h2>
+                    <p>{{ result.original_title }}</p>
+                    <!--language_film-->
+                    <p v-if="theFlag(result.original_language)">
+                        <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
+                    </p>
+                    <p v-else>{{ result.original_language }}</p>
 
-                <p v-if="theFlag(result.original_language)">
-                    <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
-                </p>
-                <p v-else>{{ result.original_language }}</p>
+                    <!--vote-film-->
+                    <div v-if="Math.trunc(result.vote_average) >= 5">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
 
-
-                <div v-if="Math.trunc(result.vote_average) >= 5">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                    <div v-else> 0</div>
                 </div>
-
-
-                <div v-else> 0</div>
-
-
-
 
             </li>
-
+            <!--serie-card-->
             <li class="card" v-for="result in state.resultsTv">
+                <!--img-serie-->
                 <div>
                     <img class="cover" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
                 </div>
-                <div>{{ result.title }}</div>
-                <div>{{ result.original_title }}</div>
+                <div class="container_info">
+                    <!--title-serie-->
+                    <h2>{{ result.name }}</h2>
+                    <p>{{ result.original_name
+                        }}</p>
+                    <!--language-serie-->
+                    <p v-if="theFlag(result.original_language)">
+                        <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
+                    </p>
+                    <p v-else>{{ result.original_language }}</p>
 
-                <div>
-                    <img class="flag" :src="'/public/1x1/' + result.original_language + '.svg'" alt="">
-                </div>
-                <div>{{ result.original_language }}</div>
-
-
-                <div v-if="Math.trunc(result.vote_average) > 5">
-                    5
-                </div>
-                <div v-else>
-                    {{ Math.trunc(result.vote_average) }}
+                    <!--vote-serie-->
+                    <div v-if="Math.trunc(result.vote_average) > 5">
+                        5
+                    </div>
+                    <div v-else>
+                        {{ Math.trunc(result.vote_average) }}
+                    </div>
                 </div>
 
             </li>
         </ul>
+
     </div>
 
 </template>
@@ -97,14 +104,35 @@ export default {
 <style>
 .card {
     border: 1px solid black;
-    margin: 3px;
+    margin: 10px;
     list-style: none;
-    border-radius: 8px;
     color: white;
     background-color: rgb(27, 27, 27);
     width: 250px;
-    padding: 8px;
-    height: 420px;
+    max-height: 370px;
+    box-sizing: content-box;
+    position: relative;
+}
+
+.cover {
+    width: 100%;
+    height: 370px;
+
+}
+
+.container_info {
+    background-color: rgba(16, 16, 16, 0.526);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: left;
+    padding: 3px;
+    line-height: 13px;
+}
+
+
+h2{
+    line-height: 20px;
 }
 
 
