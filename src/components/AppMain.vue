@@ -2,27 +2,29 @@
 import { state } from '../state.js'
 export default {
     name: 'AppMain',
+
     data() {
         return {
-            state
+            state,
+            languages: ['es', 'en', 'fr', 'it'],
         }
     },
+
     methods: {
+
+        theFlag(lang) {
+            if (this.languages.includes(lang)) {
+                return true
+            }
+            return false
+        },
+
         searchMovies() {
             const url = `${state.base_movies_api_url}?api_key=${state.key_api}&query=${state.searchFilm}`;
             //console.log(url);
             const urlSerie = `${state.base_series_api_url}?api_key=${state.key_api}&query=${state.searchFilm}`;
             this.state.callApi(url, urlSerie);
         },
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -44,10 +46,10 @@ export default {
                 <div>{{ result.title }}</div>
                 <div>{{ result.original_title }}</div>
 
-                <div>
-                    <img class="flag" :src="'/public/1x1/' + result.original_language + '.svg'" alt="">
-                </div>
-                <div>{{ result.original_language }}</div>
+                <p v-if="theFlag(result.original_language)">
+                    <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
+                </p>
+                <p v-else>{{ result.original_language }}</p>
 
 
                 <div v-if="Math.trunc(result.vote_average) >= 5">
@@ -57,13 +59,13 @@ export default {
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                 </div>
-               
-                
+
+
                 <div v-else> 0</div>
-                
-               
-              
-                
+
+
+
+
             </li>
 
             <li class="card" v-for="result in state.resultsTv">
@@ -80,12 +82,12 @@ export default {
 
 
                 <div v-if="Math.trunc(result.vote_average) > 5">
-                   5
+                    5
                 </div>
                 <div v-else>
-                   {{ Math.trunc(result.vote_average) }} 
+                    {{ Math.trunc(result.vote_average) }}
                 </div>
-                
+
             </li>
         </ul>
     </div>
@@ -107,7 +109,7 @@ export default {
 
 
 .flag {
-    width: 20px;
+    width: 15px;
     height: 13px;
 }
 </style>
