@@ -112,7 +112,9 @@ export default {
     max-height: 370px;
     box-sizing: content-box;
     position: relative;
+    
 }
+
 
 .cover {
     width: 100%;
@@ -120,15 +122,6 @@ export default {
 
 }
 
-.container_info {
-    background-color: rgba(16, 16, 16, 0.526);
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    text-align: left;
-    padding: 3px;
-    line-height: 13px;
-}
 
 
 h2{
