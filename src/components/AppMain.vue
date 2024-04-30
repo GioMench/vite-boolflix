@@ -129,9 +129,17 @@ export default {
     margin: 10px;
     list-style: none;
     color: white;
-    width: 185px;
-    height: 278px;
+    width: 285px;
+    height: 378px;
+    position: relative;
 
+}
+.card-img-overlay{
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.264);
+    width: 100%;
+    text-align: left;
 }
 
 img{
