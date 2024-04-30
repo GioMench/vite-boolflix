@@ -7,6 +7,7 @@ export default {
         return {
             state,
             languages: ['es', 'en', 'fr', 'it'],
+            voteArray: []
         }
     },
 
@@ -17,6 +18,18 @@ export default {
                 return true
             }
             return false
+        },
+
+        voteStar(number) {
+            let voteString = '';
+            const vote = Math.trunc(number);
+            for (let i = 1; i <= vote; i++) {
+                voteString += '<i class="fa-solid fa-star"></i>';
+            }
+
+            for (let i = vote; i <= 5; i++) {
+                voteString += '<i class="fa-solid fa-star"></i>';
+            }
         },
 
         searchMovies() {
@@ -40,58 +53,67 @@ export default {
 
         <ul class="container">
             <!--film-card-->
-            <li class="card" v-for="result in state.results">
+            <li v-for="result in state.results">
                 <!--img-film-->
-                <div>
-                    <img class="cover" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
-                </div>
-                <div class="container_info">
-                    <!--title-film-->
-                    <h2>{{ result.title }}</h2>
-                    <p>{{ result.original_title }}</p>
-                    <!--language_film-->
-                    <p v-if="theFlag(result.original_language)">
-                        <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
-                    </p>
-                    <p v-else>{{ result.original_language }}</p>
+                <div class="card text-bg-dark"> 
+                    <img class="card-img"
+                        :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
 
-                    <!--vote-film-->
-                    <div v-if="Math.trunc(result.vote_average) >= 5">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+
+                    <div class="card-img-overlay">
+                        <!--title-film-->
+                        <h2 class="card-title">{{ result.title }}</h2>
+                        <div class="card-text">
+                            <p>{{ result.original_title }}</p>
+                            <!--language_film-->
+                            <p v-if="theFlag(result.original_language)">
+                                <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
+                            </p>
+                            <p v-else>{{ result.original_language }}</p>
+
+                            <!--vote-film-->
+
+                            <div>
+                                {{ voteStar(result.vote_average) }}
+                            </div>
+                            <div v-for="star in voteStar(result.vote_average)">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+
+                        </div>
                     </div>
-
-                    <div v-else> 0</div>
                 </div>
+
+
 
             </li>
             <!--serie-card-->
             <li class="card" v-for="result in state.resultsTv">
                 <!--img-serie-->
-                <div>
-                    <img class="cover" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
-                </div>
-                <div class="container_info">
-                    <!--title-serie-->
-                    <h2>{{ result.name }}</h2>
-                    <p>{{ result.original_name
-                        }}</p>
-                    <!--language-serie-->
-                    <p v-if="theFlag(result.original_language)">
-                        <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
-                    </p>
-                    <p v-else>{{ result.original_language }}</p>
 
-                    <!--vote-serie-->
-                    <div v-if="Math.trunc(result.vote_average) > 5">
-                        5
+                <img class="card-img" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
+
+                <div class="card-img-overlay">
+                    <!--title-serie-->
+                    <h2 class="card-title">{{ result.name }}</h2>
+                    <div class="card-text">
+                        <p>{{ result.original_name }}</p>
+                        <!--language-serie-->
+                        <p v-if="theFlag(result.original_language)">
+                            <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
+                        </p>
+                        <p v-else>{{ result.original_language }}</p>
+
+                        <!--vote-serie-->
+
+                        <div v-if="Math.trunc(result.vote_average) > 5">
+                            5
+                        </div>
+                        <div v-else>
+                            {{ Math.trunc(result.vote_average) }}
+                        </div>
                     </div>
-                    <div v-else>
-                        {{ Math.trunc(result.vote_average) }}
-                    </div>
+
                 </div>
 
             </li>
@@ -107,26 +129,21 @@ export default {
     margin: 10px;
     list-style: none;
     color: white;
-    background-color: rgb(27, 27, 27);
-    width: 250px;
-    max-height: 370px;
-    box-sizing: content-box;
-    position: relative;
-    
+    width: 185px;
+    height: 278px;
+
 }
 
-
-.cover {
+img{
     width: 100%;
-    height: 370px;
-
+    height: 100%;
 }
 
 
-
-h2{
-    line-height: 20px;
+li {
+    list-style: none;
 }
+
 
 
 .flag {

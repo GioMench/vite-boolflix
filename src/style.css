@@ -26,7 +26,7 @@ button:hover {
   border-color: #00fb15fd;
 }
 .card:hover{
-  transition: border-color 0.25s;
+  transition: 0.25s;
   border-color: #00fb15fd;
 }
 
@@ -38,24 +38,7 @@ button:hover {
   text-align: center;
 }
 
-.container{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.container_info {
-  background-color: rgba(16, 16, 16, 0.526);
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  text-align: left;
-  padding: 3px;
-  line-height: 13px;
- 
- 
-}
-.container_info:hover{
-display: block;
-}????
+
+
 
 
