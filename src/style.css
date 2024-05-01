@@ -38,6 +38,11 @@ button:hover {
   text-align: center;
 }
 
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 
 

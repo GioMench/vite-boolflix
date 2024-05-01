@@ -7,7 +7,6 @@ export default {
         return {
             state,
             languages: ['es', 'en', 'fr', 'it'],
-            voteArray: []
         }
     },
 
@@ -20,17 +19,6 @@ export default {
             return false
         },
 
-        voteStar(number) {
-            let voteString = '';
-            const vote = Math.trunc(number);
-            for (let i = 1; i <= vote; i++) {
-                voteString += '<i class="fa-solid fa-star"></i>';
-            }
-
-            for (let i = vote; i <= 5; i++) {
-                voteString += '<i class="fa-solid fa-star"></i>';
-            }
-        },
 
         searchMovies() {
             const url = `${state.base_movies_api_url}?api_key=${state.key_api}&query=${state.searchFilm}`;
@@ -51,13 +39,13 @@ export default {
         <input type="text" v-model="state.searchFilm" @keyup.enter="searchMovies()">
         <button @click="searchMovies()">CERCA</button>
 
-        <ul class="container">
+        <div class="container">
             <!--film-card-->
-            <li v-for="result in state.results">
-                <!--img-film-->
-                <div class="card text-bg-dark"> 
-                    <img class="card-img"
-                        :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
+            <div class="row" v-for="result in state.results">
+
+                <div class="card">
+                    <!--img-film-->
+                    <img class="card-img" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
 
 
                     <div class="card-img-overlay">
@@ -71,24 +59,13 @@ export default {
                             </p>
                             <p v-else>{{ result.original_language }}</p>
 
-                            <!--vote-film-->
-
-                            <div>
-                                {{ voteStar(result.vote_average) }}
-                            </div>
-                            <div v-for="star in voteStar(result.vote_average)">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-
                         </div>
                     </div>
                 </div>
 
-
-
-            </li>
+            </div>
             <!--serie-card-->
-            <li class="card" v-for="result in state.resultsTv">
+            <div class="card" v-for="result in state.resultsTv">
                 <!--img-serie-->
 
                 <img class="card-img" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
@@ -104,20 +81,12 @@ export default {
                         </p>
                         <p v-else>{{ result.original_language }}</p>
 
-                        <!--vote-serie-->
-
-                        <div v-if="Math.trunc(result.vote_average) > 5">
-                            5
-                        </div>
-                        <div v-else>
-                            {{ Math.trunc(result.vote_average) }}
-                        </div>
                     </div>
 
                 </div>
 
-            </li>
-        </ul>
+            </div>
+        </div>
 
     </div>
 
@@ -127,35 +96,34 @@ export default {
 .card {
     border: 1px solid black;
     margin: 10px;
-    list-style: none;
     color: white;
-    width: 285px;
-    height: 378px;
+    width: 265px;
+    height: 380px;
     position: relative;
-
 }
-.card-img-overlay{
+
+.card-img-overlay {
     position: absolute;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.264);
     width: 100%;
     text-align: left;
+    height: 60%;
 }
 
-img{
+img {
     width: 100%;
     height: 100%;
+
 }
-
-
-li {
-    list-style: none;
-}
-
-
 
 .flag {
     width: 15px;
     height: 13px;
+}
+
+h2,
+p {
+    margin-left: 10px;
 }
 </style>
