@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Dosis", sans-serif;
   background-color: #242424;
 }
 
@@ -12,7 +12,7 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding:2px ;
+  padding:3px ;
   margin: 4px;
   font-size: 10px;
   font-weight: 500;
@@ -21,14 +21,12 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   color: #ffffff;
+  margin-bottom: 30px;
 }
 button:hover {
   border-color: #00fb15fd;
 }
-.card:hover{
-  transition: 0.25s;
-  border-color: #00fb15fd;
-}
+
 
 
 #app {
@@ -42,6 +40,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 

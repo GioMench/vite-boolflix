@@ -37,55 +37,73 @@ export default {
         <h1>Boolflix</h1>
 
         <input type="text" v-model="state.searchFilm" @keyup.enter="searchMovies()">
-        <button @click="searchMovies()">CERCA</button>
+        <button @click="searchMovies()">SEARCH</button>
 
         <div class="container">
-            <!--film-card-->
+
+            
+            
             <div class="row" v-for="result in state.results">
+                <div>
+                    <!--film-card-->
+                    <div class="card">
 
-                <div class="card">
-                    <!--img-film-->
-                    <img class="card-img" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
+                        <!--img-film-card-->
+                        <img class="card-img img-fluid rounded-start"
+                            :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="...">
 
+                        <!--info-film-->
+                        <div class="card-body">
+                            <h3 class="card-title">{{ result.title }}</h3>
+                            <p class="card-text small-text">RIPRODUZIONI: {{ result.popularity }}
+                            </p>
+                            <p class="card-text">STORYLINE: <br>{{ result.overview }}
+                            </p>
 
-                    <div class="card-img-overlay">
-                        <!--title-film-->
-                        <h2 class="card-title">{{ result.title }}</h2>
-                        <div class="card-text">
-                            <p>{{ result.original_title }}</p>
-                            <!--language_film-->
-                            <p v-if="theFlag(result.original_language)">
+                            <p class="card-text" v-if="theFlag(result.original_language)">
                                 <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
                             </p>
-                            <p v-else>{{ result.original_language }}</p>
 
+                            <p class="card-text" v-else>{{ result.original_language }}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <!--serie-card-->
-            <div class="card" v-for="result in state.resultsTv">
-                <!--img-serie-->
+            <br>
+            
+            <br>
+            <div class="row" v-for="result in state.resultsTv">
+                <div class="col-4">
+                    <!--serie-card-->
+                    <div class="card mb-3">
 
-                <img class="card-img" :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="">
-
-                <div class="card-img-overlay">
-                    <!--title-serie-->
-                    <h2 class="card-title">{{ result.name }}</h2>
-                    <div class="card-text">
-                        <p>{{ result.original_name }}</p>
-                        <!--language-serie-->
-                        <p v-if="theFlag(result.original_language)">
-                            <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
-                        </p>
-                        <p v-else>{{ result.original_language }}</p>
+                        <div class="row gx-3">
+                            <!--img-film-card-->
+                            <div class="col-4">
+                                <img class="card-img img-fluid rounded-start"
+                                    :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="...">
+                            </div>
+                            <!--info-film-->
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ result.name }}</h4>
+                                    <p class="card-text"><small class="text-body-secondary">{{ result.original_name }}
+                                        </small>
+                                    </p>
+                                    <p class="card-text" v-if="theFlag(result.original_language)">
+                                        <img class="flag" :src="'/public/flag/' + result.original_language + '.png'"
+                                            alt="">
+                                    </p>
+                                    <p class="card-text" v-else>{{ result.original_language }}</p>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
-
                 </div>
-
             </div>
+
         </div>
 
     </div>
@@ -94,36 +112,42 @@ export default {
 
 <style>
 .card {
-    border: 1px solid black;
-    margin: 10px;
-    color: white;
-    width: 265px;
-    height: 380px;
-    position: relative;
+    display: flex;
+    width: 400px;
+    height: 250px;
+    margin: 15px;
+    background-color: rgba(4, 4, 4, 0.34);
+    border-radius: 20px;
 }
 
-.card-img-overlay {
-    position: absolute;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.264);
-    width: 100%;
-    text-align: left;
-    height: 60%;
+.card-body {
+    padding: 15px;
+    color: whitesmoke;
+    overflow-y: scroll;
+
+}
+
+.card-body::-webkit-scrollbar {
+    display: none;
 }
 
 img {
-    width: 100%;
-    height: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
 
+.small-text {
+    font-size: x-small;
+}
+
+p {
+    font-size: smaller;
+    font-weight: 100;
 }
 
 .flag {
     width: 15px;
     height: 13px;
-}
-
-h2,
-p {
-    margin-left: 10px;
+    border-radius: 50%;
 }
 </style>
