@@ -35,7 +35,7 @@ export default {
 <template>
     <div>
         <h1>Boolflix</h1>
-
+        
         <input type="text" v-model="state.searchFilm" @keyup.enter="searchMovies()">
         <button @click="searchMovies()">SEARCH</button>
 
@@ -58,7 +58,7 @@ export default {
                             <p class="small-text"><em>streaming: </em> <strong> {{ result.popularity }}</strong>
                             </p>
 
-                            <p><em>STORYLINE:</em> <br>{{ result.overview }}
+                            <p>{{ result.overview }}
                             </p>
 
                             <p v-if="theFlag(result.original_language)">
@@ -95,14 +95,16 @@ export default {
                             <p class="small-text"><em>streaming: </em> <strong> {{ result.popularity }}</strong>
                             </p>
 
-                            <p><em>STORYLINE:</em> <br>{{ result.overview }}
+                            <p>{{ result.overview }}
                             </p>
 
 
-                            <p v-if="theFlag(result.original_language)"><div class="small-text">LANG:</div>
-                                <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
+                            <p v-if="theFlag(result.original_language)">
+                            <div class="small-text">LANG:</div>
+                            <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
                             </p>
-                            <p v-else><div class="small-text">LANG:</div>{{ result.original_language }}</p>
+                            <p v-else>
+                            <div class="small-text">LANG:</div>{{ result.original_language }}</p>
                         </div>
                     </div>
                 </div>
@@ -115,7 +117,7 @@ export default {
 
 
 
-   
+
 
 </template>
 
