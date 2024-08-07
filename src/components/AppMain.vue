@@ -41,99 +41,129 @@ export default {
 
         <div class="container">
 
-            
-            
-            <div class="row" v-for="result in state.results">
-                <div>
-                    <!--film-card-->
-                    <div class="card">
 
-                        <!--img-film-card-->
-                        <img class="card-img img-fluid rounded-start"
-                            :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="...">
 
-                        <!--info-film-->
-                        <div class="card-body">
-                            <h3 class="card-title">{{ result.title }}</h3>
-                            <p class="card-text small-text">RIPRODUZIONI: {{ result.popularity }}
+            <div v-for="result in state.results">
+
+                <div class="card">
+                    <!--img-film-card-->
+                    <img class="card-img img-fluid rounded-start"
+                        :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="...">
+                    <!--info-film-card-->
+                    <div class="card-body">
+                        <div class="card-text">
+                            <h3>{{ result.title }}</h3>
+                            <p class="small-text"><em>year: </em> <strong> {{ result.release_date }}</strong>
                             </p>
-                            <p class="card-text">STORYLINE: <br>{{ result.overview }}
+                            <p class="small-text"><em>streaming: </em> <strong> {{ result.popularity }}</strong>
                             </p>
 
-                            <p class="card-text" v-if="theFlag(result.original_language)">
+                            <p><em>STORYLINE:</em> <br>{{ result.overview }}
+                            </p>
+
+                            <p v-if="theFlag(result.original_language)">
+                            <div class="small-text">LANG:</div>
+                            <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
+                            </p>
+
+                            <p v-else>
+                            <div class="small-text">LANG:</div> {{ result.original_language }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row" v-for="result in state.resultsTv">
+
+                <!--serie-card-->
+                <div class="card">
+
+                    <!--img-serie-card-->
+                    <img class="card-img img-fluid rounded-start"
+                        :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="...">
+
+                    <!--info-serie-->
+                    <div class="card-body">
+                        <div class="card-text">
+                            <h3>{{ result.name }}</h3>
+                            <h3>{{ result.title }}</h3>
+                            <p class="small-text"><em>year: </em> <strong> {{ result.first_air_date }}</strong>
+                            </p>
+                            <p class="small-text"><em>streaming: </em> <strong> {{ result.popularity }}</strong>
+                            </p>
+
+                            <p><em>STORYLINE:</em> <br>{{ result.overview }}
+                            </p>
+
+
+                            <p v-if="theFlag(result.original_language)"><div class="small-text">LANG:</div>
                                 <img class="flag" :src="'/public/flag/' + result.original_language + '.png'" alt="">
                             </p>
-
-                            <p class="card-text" v-else>{{ result.original_language }}</p>
+                            <p v-else><div class="small-text">LANG:</div>{{ result.original_language }}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <br>
-            
-            <br>
-            <div class="row" v-for="result in state.resultsTv">
-                <div class="col-4">
-                    <!--serie-card-->
-                    <div class="card mb-3">
-
-                        <div class="row gx-3">
-                            <!--img-film-card-->
-                            <div class="col-4">
-                                <img class="card-img img-fluid rounded-start"
-                                    :src="'http://image.tmdb.org/t/p/w185/' + result.poster_path" alt="...">
-                            </div>
-                            <!--info-film-->
-                            <div class="col-8">
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ result.name }}</h4>
-                                    <p class="card-text"><small class="text-body-secondary">{{ result.original_name }}
-                                        </small>
-                                    </p>
-                                    <p class="card-text" v-if="theFlag(result.original_language)">
-                                        <img class="flag" :src="'/public/flag/' + result.original_language + '.png'"
-                                            alt="">
-                                    </p>
-                                    <p class="card-text" v-else>{{ result.original_language }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
         </div>
-
     </div>
+
+
+
+
+
+   
 
 </template>
 
 <style>
 .card {
-    display: flex;
-    width: 400px;
-    height: 250px;
+    position: relative;
+    width: 185px;
+    height: 265px;
     margin: 15px;
-    background-color: rgba(4, 4, 4, 0.34);
+
+
+}
+
+
+img {
+    width: 185px;
+    height: 265px;
     border-radius: 20px;
+
+}
+
+.card:hover {
+    .card-body {
+        display: block;
+    }
 }
 
 .card-body {
-    padding: 15px;
+    width: 185px;
+    height: 265px;
+    border-radius: 20px;
     color: whitesmoke;
     overflow-y: scroll;
-
+    position: absolute;
+    bottom: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.815);
 }
+
 
 .card-body::-webkit-scrollbar {
     display: none;
 }
 
-img {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+
+
+.card-text {
+    padding: 10px;
 }
 
 .small-text {
